@@ -1,0 +1,24 @@
+{
+  "name": "memecoin-dodge",
+  "version": "1.0.0",
+  "description": "A 3D game where players dodge falling memecoin missiles based on market data",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "three.js",
+    "game",
+    "cryptocurrency",
+    "memecoin"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2",
+    "three": "^0.158.0",
+    "vite": "^4.5.0"
+  }
+}
