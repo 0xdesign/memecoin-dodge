@@ -114,23 +114,11 @@ class MemecoinDodgeGame {
     this.ui.loadingBar = document.getElementById('loading-bar');
     this.ui.joystickKnob = document.querySelector('.joystick-knob');
     this.ui.alertMessage = document.getElementById('alert-message');
-    this.ui.instructions = document.getElementById('instructions');
     
     // Add restart button event listener
     this.ui.restartButton.addEventListener('click', () => this.restartGame());
     
     // Add touch button event listeners
-    document.getElementById('jump-button').addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      if (this.playerOnGround) {
-        this.playerVelocity.y = this.jumpHeight;
-        this.playerOnGround = false;
-        
-        // Play jump sound
-        this.playSound(this.sounds.jump);
-      }
-    });
-    
     document.getElementById('dash-button').addEventListener('touchstart', (e) => {
       e.preventDefault();
       this.tryDash();
@@ -1624,16 +1612,8 @@ class MemecoinDodgeGame {
     if (this.touchControls.active) {
       const touchSensitivity = 0.05 * dashFactor;
       this.player.position.x += this.touchControls.moveX * touchSensitivity * deltaTime;
-      this.player.position.z -= this.touchControls.moveY * touchSensitivity * deltaTime;
-      
-      // Check for jump gesture (quick upward swipe)
-      if (this.touchControls.moveY > 50 && this.playerOnGround) {
-        this.playerVelocity.y = this.jumpHeight;
-        this.playerOnGround = false;
-        
-        // Play jump sound
-        this.playSound(this.sounds.jump);
-      }
+      // Fix inverted controls: change from -= to += to make joystick up move player forward
+      this.player.position.z += this.touchControls.moveY * touchSensitivity * deltaTime;
     }
     
     // Update player rotation based on movement
